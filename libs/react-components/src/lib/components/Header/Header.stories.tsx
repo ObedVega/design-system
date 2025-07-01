@@ -15,6 +15,7 @@ const meta = {
   },
   args: {
     title: 'Developers',
+    titleLink: 'https://developers.teradata.com/',
     navItems: [
       {
         href: 'test',
@@ -82,16 +83,36 @@ const meta = {
       {
         actionElement: (
           <div>
-            <Icon className="fa fa-search" />
+            <Icon className="fa fa-search" style={{ fontSize: 16 }} />
           </div>
         ),
         type: 'search',
       },
       {
-        actionElement: <Button icon="fa fa-home" label="Start free demo" />,
+        actionElement: (
+          <Button icon="fa fa-home" label="Start free demo" variant={'text'} />
+        ),
         type: 'button',
       },
     ],
+    announcementContent: (
+      <div>
+        <Icon className="fa-regular fa-bell" style={{ marginRight: '8px' }} />
+        <span>Important Announcement: </span>
+        <a
+          href="https://www.teradata.com"
+          style={{
+            marginLeft: '4px',
+            color: '#007bff',
+            textDecoration: 'underline',
+          }}
+          target="_blank"
+          rel="noreferrer"
+        >
+          Start free demo
+        </a>
+      </div>
+    ),
   },
 } satisfies Meta<typeof Header>;
 

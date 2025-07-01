@@ -21,7 +21,9 @@ export const DropdownMenuItem: React.FC<DropdownMenuItemProps> = ({
   };
   return (
     <li
-      className={`${styles.dropdownMenuItem} ${navItem.navItems ? styles.nested : ''}`}
+      className={`${styles.dropdownMenuItem} ${
+        navItem.navItems ? styles.nested : ''
+      }`}
     >
       {navItem.navItems ? (
         <div
@@ -55,7 +57,7 @@ export const DropdownMenuItem: React.FC<DropdownMenuItemProps> = ({
 
 export const DropdownMenu: React.FC<DropdownMenuProps> = ({ navItems }) => {
   const renderNavItems = (
-    navItems: NavListItem[] | undefined
+    navItems: NavListItem[] | undefined,
   ): JSX.Element | null => {
     if (!navItems) return null;
 

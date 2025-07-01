@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './styles.module.scss';
 import externalLinkIcon from '../../assets/external-link.svg';
-import IconLink from '../IconLink';
+import { SvgIcon } from '../SvgIcon';
 
 export type FooterNavLink = {
   label: string;
@@ -31,6 +31,7 @@ export type SocialLinks = {
   items: {
     icon: string;
     href: string;
+    external?: boolean;
     label?: string;
   }[];
 };
@@ -96,7 +97,12 @@ export const FooterNavLinkItem: React.FC<FooterNavLink> = ({
 }) => {
   return (
     <li className={styles.footerLinkItem}>
-      <a href={href} className={styles.footerNavLink}>
+      <a
+        href={href}
+        className={styles.footerNavLink}
+        target={external ? '_blank' : '_self'}
+        rel="noreferrer"
+      >
         {label}
         {external && (
           <img
@@ -140,8 +146,10 @@ const Footer: React.FC<FooterProps> = ({
           </ul>
         </section>
       )}
-      <footer className={`${styles.containerWide} ${styles.footer}`}>
-        <section className={`${styles.footerLinksWrapper}`}>
+      <footer className={styles.footer}>
+        <section
+          className={`${styles.containerWide} ${styles.footerLinksWrapper}`}
+        >
           {links &&
             links.map((link, index) => (
               <FooterNavLinkList
@@ -158,19 +166,24 @@ const Footer: React.FC<FooterProps> = ({
               <ul className={styles.socialLinksList}>
                 {socialLinks.items?.map((item, index) => (
                   <li key={index}>
-                    <IconLink
-                      iconName={item.icon}
+                    <a
                       href={item.href}
-                      size={12}
-                      label={item.label}
-                    />
+                      target={item.external ? '_blank' : '_self'}
+                      aria-label={`Social Link${item.label ? `- ${item.label}` : ''}`}
+                      rel="noreferrer"
+                      className={styles.socialLink}
+                    >
+                      <SvgIcon iconName={item.icon} size={14} />
+                    </a>
                   </li>
                 ))}
               </ul>
             </div>
           )}
         </section>
-        <section className={`${styles.copyrightWrapper}`}>
+        <section
+          className={`${styles.containerWide} ${styles.copyrightWrapper}`}
+        >
           <div className={styles.copyrightLinks}>
             <div className={styles.copyrightText}>&copy;{copyright}</div>
             {legalLinks && (

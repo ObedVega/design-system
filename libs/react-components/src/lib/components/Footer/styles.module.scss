@@ -8,28 +8,31 @@
 
 .footer {
   margin: 0;
-  padding-bottom: 40px;
+  padding: 20px 0 40px;
 }
 
 .footerLinksWrapper {
   align-items: flex-start;
   display: flex;
   flex-wrap: nowrap;
-  padding-top: 20px;
 }
 
 .footerLink {
-  padding: 0.5rem;
+  padding: 8px;
   flex: 1 0 0;
 }
 
 .footerLinkTitle {
   color: var(--td-web-primary-navy);
+  font-size: 18px;
   font-weight: 600;
-  padding-bottom: 1rem;
   line-height: 28px;
   position: relative;
   pointer-events: none;
+}
+
+.socialLinksWrapper .footerLinkTitle {
+  padding-bottom: 16px;
 }
 
 .footerLinkItem {
@@ -41,7 +44,7 @@
   color: var(--td-web-primary-navy);
   font-weight: 400;
   font-size: 15px;
-  line-height: 1.5rem;
+  line-height: 24px;
   background-image: linear-gradient(
     var(--td-web-primary-navy),
     var(--td-web-primary-navy)
@@ -60,20 +63,39 @@
 }
 
 .socialLinksList {
-  display: grid;
-  grid-template-columns: repeat(3, 0fr);
-  gap: 1rem 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 12px;
+}
+
+.socialLink {
+  align-items: center;
+  background: var(--td-web-primary-navy);
+  border-radius: 100%;
+  color: var(--cv-theme-surface-container-lowest);
+  display: inline-flex;
+  height: 44px;
+  justify-content: center;
+  width: 44px;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out 0s;
+  text-decoration: none;
+}
+
+.socialLink:hover {
+  background: var(--cv-theme-tertiary);
+  text-decoration: none;
 }
 
 .legalLinksWrapper {
   display: flex;
   flex-wrap: wrap;
-  gap: 0 1.5rem;
+  gap: 0 24px;
 }
 
 .copyrightWrapper {
   align-items: center;
-  font-size: 0.875rem;
+  font-size: 14px;
   margin: 0 auto;
 }
 
@@ -87,7 +109,7 @@
 }
 
 .copyrightText {
-  margin-bottom: 1.5rem;
+  margin-bottom: 24px;
 }
 
 .externalIconImg {
@@ -95,7 +117,7 @@
 }
 
 .legalLinksWrapper .footerLinkItem {
-  margin: 0 0 0.5rem;
+  margin: 0 0 8px;
 }
 
 .footer,
@@ -116,13 +138,14 @@
 .linksOfInterest {
   font-size: 14px;
   line-height: 28px;
-  max-width: 1440px;
-  padding: 0.5rem;
+  padding: 8px;
   text-align: center;
 }
 
 .linksOfInterestTitle {
-  font-family: Space Grotesk, sans-serif;
+  font-family:
+    Space Grotesk,
+    sans-serif;
   font-weight: 600;
   margin: 0;
 }
@@ -133,11 +156,7 @@
 
 @media screen and (min-width: 768px) {
   .footer {
-    padding-bottom: 40px;
-  }
-
-  .footerLinksWrapper {
-    padding-top: 60px;
+    padding: 60px 0 40px;
   }
 
   .legalLinksWrapper .footerLinkItem {
@@ -161,14 +180,14 @@
 
 @media screen and (min-width: 992px) {
   .copyrightLinks {
-    margin: 1rem 0 2.625rem;
+    margin: 16px 0 42px;
   }
 }
 
 @media screen and (min-width: 1024px) {
   .linkOfInterest {
     display: inline-block;
-    margin-right: 2em;
+    margin-right: 32px;
   }
 }
 
@@ -194,8 +213,8 @@
 
     .footerLinkTitle {
       pointer-events: all;
-
-      padding: 1rem 0;
+      font-size: 16px;
+      padding: 16px 0;
       display: flex;
       align-items: center;
       cursor: pointer;
@@ -215,7 +234,7 @@
   }
 
   .socialLinksList {
-    grid-template-columns: repeat(4, 1fr);
+    max-width: 215px;
   }
 
   .socialLinksWrapper {

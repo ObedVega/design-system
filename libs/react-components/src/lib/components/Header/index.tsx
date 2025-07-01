@@ -27,6 +27,10 @@ interface HeaderProps {
    */
   title: string;
   /**
+   *  Link associated with the title of the header
+   */
+  titleLink: string;
+  /**
    * Nav items to be displayed in the navbar
    */
   navItems: NavListItem[];
@@ -50,19 +54,25 @@ interface HeaderProps {
    * Secondary menu content for mobile view
    */
   secondaryMenu?: { menuElement: JSX.Element; title: string };
+  /**
+   * Announcement content to be displayed in the header
+   */
+  announcementContent?: React.ReactNode;
 }
 
 const Header: React.FC<HeaderProps> = ({
   title,
+  titleLink = '',
   navItems = [],
   languages,
   headerActions,
   onLanguageChange,
   selectedLanguage,
   secondaryMenu,
+  announcementContent,
 }) => {
   const [activeNavItem, setActiveNavItem] = useState<number | null>(
-    navItems.findIndex((item) => item.active)
+    navItems.findIndex((item) => item.active),
   );
   const [activeMobileMenu, setActiveMobileMenu] = useState<boolean>(false);
 
@@ -138,10 +148,15 @@ const Header: React.FC<HeaderProps> = ({
       >
         {/* Header utility bar with the language switcher begins */}
         <section className={styles.headerUtility}>
-          <div className={styles.containerWide}>
+          <div
+            className={`${styles.containerWide} ${
+              announcementContent ? styles.containerWideWithAnnouncment : ''
+            }`}
+          >
+            {announcementContent && announcementContent}
             <ul className={styles.headerUtilityNav}>
               <li>
-                <a href="https://teradata.com" target="_self">
+                <a href="https://www.teradata.com/" target="_self">
                   Teradata.com
                 </a>
               </li>
@@ -158,20 +173,21 @@ const Header: React.FC<HeaderProps> = ({
           <header className={`${styles.headerNav} ${styles.containerWide}`}>
             <nav>
               <div className={styles.headerNavElement}>
-                <a
-                  className={styles.headerNavLogo}
-                  href="https://www.teradata.com/"
-                  target="_self"
-                >
-                  <img
-                    className={styles.teradataLogo}
-                    src={logo}
-                    alt="Teradata Logo"
-                  />
+                <span className={styles.headerNavLogo}>
+                  <a href="https://www.teradata.com/" target="_self">
+                    <img
+                      className={styles.teradataLogo}
+                      src={logo}
+                      alt="Teradata Logo"
+                    />
+                  </a>
+
                   {title && (
-                    <span className={styles.headerNavLogoText}>{title}</span>
+                    <a href={titleLink} target="_self">
+                      <span className={styles.headerNavLogoText}>{title}</span>
+                    </a>
                   )}
-                </a>
+                </span>
               </div>
               {navItems && (
                 <div className={styles.headerNavElement}>
@@ -211,20 +227,23 @@ const Header: React.FC<HeaderProps> = ({
           <header className={styles.headerNavMobile}>
             <nav>
               <section className={styles.headerNavMobileWrapper}>
-                <a
-                  className={styles.headerNavLogo}
-                  href="http://developers.teradata.com/"
-                  target="_self"
-                >
-                  <img
-                    className={styles.teradataLogo}
-                    src={logo}
-                    alt="Teradata Logo"
-                  />
-                  <span className={styles.headerNavMobileLogoText}>
-                    {title}
-                  </span>
-                </a>
+                <span className={styles.headerNavLogo}>
+                  <a href="http://www.teradata.com/" target="_self">
+                    <img
+                      className={styles.teradataLogo}
+                      src={logo}
+                      alt="Teradata Logo"
+                    />
+                  </a>
+                  {title && (
+                    <a href={titleLink} target="_self">
+                      <span className={styles.headerNavMobileLogoText}>
+                        {title}
+                      </span>
+                    </a>
+                  )}
+                </span>
+
                 <ul className={styles.headerNavMobileTopLinks}>
                   {search && <li>{search.actionElement}</li>}
                   <li>
@@ -296,7 +315,7 @@ const Header: React.FC<HeaderProps> = ({
                         (action, index) =>
                           action.type === 'button' && (
                             <li key={index}>{action.actionElement}</li>
-                          )
+                          ),
                       )}
                   </ul>
                   <div className={styles.headerNavMobileFooter}>
